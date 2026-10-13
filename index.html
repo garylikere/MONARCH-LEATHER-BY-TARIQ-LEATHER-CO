@@ -1,11 +1,10 @@
-
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Monarch Leather | Tariq Leather Co.</title>
-    <!-- Tailwind CSS & FontAwesome Icons -->
+    <!-- Core UI CDN Matrix Framework Links -->
     <script src="https://tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cloudflare.com">
     <script>
@@ -52,7 +51,7 @@
             
             <!-- Navbar Actions -->
             <div class="flex items-center space-x-4">
-                <button onclick="openAdminModal()" class="bg-gold/10 text-gold border border-gold/30 px-3 py-1.5 rounded-md text-xs font-semibold hover:bg-gold hover:text-black transition flex items-center gap-1.5 shadow-md">
+                <button onclick="openAdminModal()" class="bg-gold/10 text-gold border border-gold/40 px-3 py-1.5 rounded-md text-xs font-semibold hover:bg-gold hover:text-black transition flex items-center gap-1.5 shadow-md">
                     <i class="fa-solid fa-lock"></i> Admin Panel
                 </button>
                 <div class="relative cursor-pointer text-white hover:text-gold transition">
@@ -79,7 +78,6 @@
                     <button onclick="filterCategory('wallets')" class="w-full text-left py-2.5 px-3 rounded hover:bg-gold/10 hover:text-gold transition text-sm font-medium flex justify-between items-center"><span>Leather Wallets</span><i class="fa-solid fa-chevron-right text-[10px]"></i></button>
                 </nav>
             </div>
-            <!-- Sidebar Footer Social Links -->
             <div class="border-t border-borderGray pt-4">
                 <p class="text-xs text-gray-500 mb-2">Follow Us</p>
                 <div class="flex space-x-3">
@@ -91,7 +89,7 @@
         </div>
     </div>
 
-    <!-- Hero Announcement / Hero Banner Slider -->
+    <!-- Hero Announcement Slider Banner -->
     <section class="relative bg-gradient-to-b from-neutral-900 to-darkBg py-12 text-center px-4 border-b border-borderGray">
         <div class="max-w-4xl mx-auto space-y-4">
             <span class="inline-block bg-gold/10 text-gold text-[11px] px-3 py-1 rounded-full uppercase tracking-widest border border-gold/20 font-bold">New Arrival Latest Styles</span>
@@ -110,30 +108,32 @@
         <h2 class="text-xl font-black text-white tracking-widest uppercase mb-6">Masterpiece</h2>
         
         <div class="flex justify-center items-center gap-6 md:gap-12 overflow-x-auto pb-4 custom-scrollbar">
-            <!-- Category Circle Item -->
             <div onclick="filterCategory('jackets')" class="group cursor-pointer flex-shrink-0 text-center">
                 <div class="w-16 h-16 rounded-full bg-cardBg border-2 border-gold/30 group-hover:border-gold flex items-center justify-center transition shadow-lg overflow-hidden">
                     <i class="fa-solid fa-user-tie text-xl text-gold"></i>
                 </div>
                 <p class="text-[11px] font-bold mt-2 uppercase tracking-wider group-hover:text-gold transition">Jackets</p>
             </div>
-            <!-- Category Circle Item -->
             <div onclick="filterCategory('bags')" class="group cursor-pointer flex-shrink-0 text-center">
                 <div class="w-16 h-16 rounded-full bg-cardBg border-2 border-gold/30 group-hover:border-gold flex items-center justify-center transition shadow-lg overflow-hidden">
                     <i class="fa-solid fa-bag-shopping text-xl text-gold"></i>
                 </div>
                 <p class="text-[11px] font-bold mt-2 uppercase tracking-wider group-hover:text-gold transition">Bags</p>
             </div>
-            <!-- Category Circle Item -->
             <div onclick="filterCategory('shoes')" class="group cursor-pointer flex-shrink-0 text-center">
                 <div class="w-16 h-16 rounded-full bg-cardBg border-2 border-gold/30 group-hover:border-gold flex items-center justify-center transition shadow-lg overflow-hidden">
                     <i class="fa-solid fa-shoe-prints text-xl text-gold"></i>
                 </div>
                 <p class="text-[11px] font-bold mt-2 uppercase tracking-wider group-hover:text-gold transition">Shoes</p>
             </div>
-            <!-- Category Circle Item -->
             <div onclick="filterCategory('wallets')" class="group cursor-pointer flex-shrink-0 text-center">
                 <div class="w-16 h-16 rounded-full bg-cardBg border-2 border-gold/30 group-hover:border-gold flex items-center justify-center transition shadow-lg overflow-hidden">
                     <i class="fa-solid fa-wallet text-xl text-gold"></i>
-  </div>
-  
+                </div>
+                <p class="text-[11px] font-bold mt-2 uppercase tracking-wider group-hover:text-gold transition">Wallets</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Catalog Section -->
+    <section id="catalog" class="max-w-7xl mx-auto px-4 py-8 flex-grow">
