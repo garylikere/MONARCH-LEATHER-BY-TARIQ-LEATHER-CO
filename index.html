@@ -1,1 +1,139 @@
 
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monarch Leather | Tariq Leather Co.</title>
+    <!-- Tailwind CSS & FontAwesome Icons -->
+    <script src="https://tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cloudflare.com">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gold: '#D4AF37',
+                        goldHover: '#AA8A26',
+                        darkBg: '#0A0A0A',
+                        cardBg: '#121212',
+                        borderGray: '#222222'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #0A0A0A; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #D4AF37; border-radius: 3px; }
+    </style>
+</head>
+<body class="bg-darkBg text-gray-200 font-sans antialiased min-h-screen flex flex-col justify-between">
+
+    <!-- Top Promo Bar -->
+    <div class="bg-gold text-black text-center py-1.5 text-xs font-bold tracking-wide">
+        ⚡ FREE Shipping Worldwide + Free Gift On Every Order! 🎁
+    </div>
+
+    <!-- Header / Navbar -->
+    <header class="bg-cardBg/95 backdrop-blur-md border-b border-gold/10 sticky top-0 z-50 shadow-xl">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+            <!-- Sidebar Menu Trigger & Branding -->
+            <div class="flex items-center space-x-4">
+                <button onclick="toggleSidebar(true)" class="text-white hover:text-gold text-xl focus:outline-none">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+                <div>
+                    <h1 class="text-xl md:text-2xl font-black tracking-wider text-gold uppercase m-0 leading-none">Monarch Leather</h1>
+                    <p class="text-[9px] text-gray-400 tracking-widest uppercase mt-1">Tariq Leather Co.</p>
+                </div>
+            </div>
+            
+            <!-- Navbar Actions -->
+            <div class="flex items-center space-x-4">
+                <button onclick="openAdminModal()" class="bg-gold/10 text-gold border border-gold/30 px-3 py-1.5 rounded-md text-xs font-semibold hover:bg-gold hover:text-black transition flex items-center gap-1.5 shadow-md">
+                    <i class="fa-solid fa-lock"></i> Admin Panel
+                </button>
+                <div class="relative cursor-pointer text-white hover:text-gold transition">
+                    <i class="fa-solid fa-bag-shopping text-xl"></i>
+                    <span id="cartCount" class="absolute -top-2 -right-2 bg-gold text-black text-[10px] font-bold px-1.5 py-0.5 rounded-full">0</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation Drawer / Sidebar -->
+    <div id="sidebar" class="fixed inset-0 bg-black/70 z-50 transition-opacity duration-300 opacity-0 pointer-events-none">
+        <div class="fixed inset-y-0 left-0 w-72 bg-cardBg border-r border-gold/10 p-5 transform -translate-x-full transition-transform duration-300 flex flex-col justify-between">
+            <div>
+                <div class="flex justify-between items-center pb-4 border-b border-borderGray">
+                    <h3 class="text-gold font-bold uppercase tracking-wider">Menu Categories</h3>
+                    <button onclick="toggleSidebar(false)" class="text-gray-400 hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
+                </div>
+                <nav class="mt-4 space-y-1">
+                    <button onclick="filterCategory('all')" class="w-full text-left py-2.5 px-3 rounded hover:bg-gold/10 hover:text-gold transition text-sm font-medium flex justify-between items-center"><span>All Collections</span><i class="fa-solid fa-chevron-right text-[10px]"></i></button>
+                    <button onclick="filterCategory('jackets')" class="w-full text-left py-2.5 px-3 rounded hover:bg-gold/10 hover:text-gold transition text-sm font-medium flex justify-between items-center"><span>Leather Jackets <span class="bg-red-600 text-white text-[9px] px-1 rounded ml-1 font-bold">HOT</span></span><i class="fa-solid fa-chevron-right text-[10px]"></i></button>
+                    <button onclick="filterCategory('bags')" class="w-full text-left py-2.5 px-3 rounded hover:bg-gold/10 hover:text-gold transition text-sm font-medium flex justify-between items-center"><span>Leather Bags <span class="bg-gold text-black text-[9px] px-1 rounded ml-1 font-bold">NEW</span></span><i class="fa-solid fa-chevron-right text-[10px]"></i></button>
+                    <button onclick="filterCategory('shoes')" class="w-full text-left py-2.5 px-3 rounded hover:bg-gold/10 hover:text-gold transition text-sm font-medium flex justify-between items-center"><span>Leather Shoes</span><i class="fa-solid fa-chevron-right text-[10px]"></i></button>
+                    <button onclick="filterCategory('wallets')" class="w-full text-left py-2.5 px-3 rounded hover:bg-gold/10 hover:text-gold transition text-sm font-medium flex justify-between items-center"><span>Leather Wallets</span><i class="fa-solid fa-chevron-right text-[10px]"></i></button>
+                </nav>
+            </div>
+            <!-- Sidebar Footer Social Links -->
+            <div class="border-t border-borderGray pt-4">
+                <p class="text-xs text-gray-500 mb-2">Follow Us</p>
+                <div class="flex space-x-3">
+                    <a href="#" target="_blank" class="text-gray-400 hover:text-gold text-lg"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="#" target="_blank" class="text-gray-400 hover:text-gold text-lg"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" target="_blank" class="text-gray-400 hover:text-gold text-lg"><i class="fa-brands fa-tiktok"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Announcement / Hero Banner Slider -->
+    <section class="relative bg-gradient-to-b from-neutral-900 to-darkBg py-12 text-center px-4 border-b border-borderGray">
+        <div class="max-w-4xl mx-auto space-y-4">
+            <span class="inline-block bg-gold/10 text-gold text-[11px] px-3 py-1 rounded-full uppercase tracking-widest border border-gold/20 font-bold">New Arrival Latest Styles</span>
+            <h2 class="text-3xl md:text-5xl font-black text-white tracking-tight uppercase">Up to <span class="text-gold">60% OFF</span> For Retail & B2B</h2>
+            <p class="text-gray-400 text-xs md:text-sm max-w-xl mx-auto">Engineered from 100% genuine full-grain leather. Direct USA export quality standard fit setup.</p>
+            <div class="inline-flex items-center bg-cardBg border border-dashed border-gold/40 px-3 py-1.5 rounded text-xs gap-2">
+                <span class="text-gray-400">Use Coupon Code:</span>
+                <span class="text-gold font-bold tracking-wider">SAVE10</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Masterpiece Circle Categories Navigation -->
+    <section class="max-w-7xl mx-auto px-4 pt-10 text-center">
+        <h3 class="text-xs uppercase tracking-widest text-gray-400 font-bold mb-1">Let's Craft Your Next</h3>
+        <h2 class="text-xl font-black text-white tracking-widest uppercase mb-6">Masterpiece</h2>
+        
+        <div class="flex justify-center items-center gap-6 md:gap-12 overflow-x-auto pb-4 custom-scrollbar">
+            <!-- Category Circle Item -->
+            <div onclick="filterCategory('jackets')" class="group cursor-pointer flex-shrink-0 text-center">
+                <div class="w-16 h-16 rounded-full bg-cardBg border-2 border-gold/30 group-hover:border-gold flex items-center justify-center transition shadow-lg overflow-hidden">
+                    <i class="fa-solid fa-user-tie text-xl text-gold"></i>
+                </div>
+                <p class="text-[11px] font-bold mt-2 uppercase tracking-wider group-hover:text-gold transition">Jackets</p>
+            </div>
+            <!-- Category Circle Item -->
+            <div onclick="filterCategory('bags')" class="group cursor-pointer flex-shrink-0 text-center">
+                <div class="w-16 h-16 rounded-full bg-cardBg border-2 border-gold/30 group-hover:border-gold flex items-center justify-center transition shadow-lg overflow-hidden">
+                    <i class="fa-solid fa-bag-shopping text-xl text-gold"></i>
+                </div>
+                <p class="text-[11px] font-bold mt-2 uppercase tracking-wider group-hover:text-gold transition">Bags</p>
+            </div>
+            <!-- Category Circle Item -->
+            <div onclick="filterCategory('shoes')" class="group cursor-pointer flex-shrink-0 text-center">
+                <div class="w-16 h-16 rounded-full bg-cardBg border-2 border-gold/30 group-hover:border-gold flex items-center justify-center transition shadow-lg overflow-hidden">
+                    <i class="fa-solid fa-shoe-prints text-xl text-gold"></i>
+                </div>
+                <p class="text-[11px] font-bold mt-2 uppercase tracking-wider group-hover:text-gold transition">Shoes</p>
+            </div>
+            <!-- Category Circle Item -->
+            <div onclick="filterCategory('wallets')" class="group cursor-pointer flex-shrink-0 text-center">
+                <div class="w-16 h-16 rounded-full bg-cardBg border-2 border-gold/30 group-hover:border-gold flex items-center justify-center transition shadow-lg overflow-hidden">
+                    <i class="fa-solid fa-wallet text-xl text-gold"></i>
+  </div>
+  
