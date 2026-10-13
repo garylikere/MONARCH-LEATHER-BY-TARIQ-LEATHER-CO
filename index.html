@@ -1,121 +1,267 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Monarch Leather</title>
-    <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: sans-serif; }
-        body { background: #0A0A0A; color: #E0E0E0; padding: 15px; }
-        header { background: #121212; border-bottom: 2px solid #D4AF37; padding: 15px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-        .logo h1 { color: #D4AF37; font-size: 20px; text-transform: uppercase; }
-        .logo p { color: #888; font-size: 9px; text-transform: uppercase; letter-spacing: 1px; }
-        .admin-btn { background: none; border: 1px solid #D4AF37; color: #D4AF37; padding: 6px 12px; border-radius: 4px; font-weight: bold; cursor: pointer; }
-        .cats-bar { display: flex; justify-content: center; gap: 10px; margin-bottom: 20px; overflow-x: auto; padding-bottom: 5px; }
-        .cat-btn { background: #121212; border: 1px solid #333; color: #FFF; padding: 8px 16px; border-radius: 20px; font-size: 11px; cursor: pointer; font-weight: bold; text-transform: uppercase; }
-        .cat-btn:hover, .cat-btn.active { background: #D4AF37; color: #000; border-color: #D4AF37; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px; }
-        .card { background: #121212; border: 1px solid #222; border-radius: 6px; padding: 10px; display: flex; flex-direction: column; justify-content: space-between; }
-        .card img { width: 100%; aspect-ratio: 1; object-fit: cover; background: #1A1A1A; border-radius: 4px; }
-        .card h4 { font-size: 12px; margin: 8px 0; text-transform: uppercase; height: 32px; overflow: hidden; }
-        .price { color: #D4AF37; font-weight: bold; font-size: 14px; }
-        .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.9); display: flex; align-items: center; justify-content: center; z-index: 100; padding: 20px; }
-        .modal-box { background: #121212; border: 1px solid #D4AF37; padding: 20px; border-radius: 8px; width: 100%; max-width: 320px; }
-        .row { margin-bottom: 12px; }
-        .row label { display: block; font-size: 10px; color: #888; margin-bottom: 4px; text-transform: uppercase; }
-        .row input, .row select { width: 100%; background: #0A0A0A; border: 1px solid #333; padding: 8px; color: #FFF; font-size: 12px; border-radius: 4px; }
-        .submit-btn { width: 100%; background: #D4AF37; color: #000; padding: 10px; border: none; font-weight: bold; border-radius: 4px; cursor: pointer; text-transform: uppercase; }
-        .hidden { display: none !important; }
-    </style>
+    <title>Monarch Leather | Tariq Leather Co.</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gold: '#D4AF37',
+                        goldHover: '#B5922C',
+                        darkBg: '#0F0F0F',
+                        cardBg: '#181818'
+                    }
+                }
+            }
+        }
+    </script>
 </head>
-<body>
+<body class="bg-darkBg text-gray-200 font-sans antialiased min-h-screen flex flex-col justify-between">
 
-    <header>
-        <div class="logo">
-            <h1>Monarch Leather</h1>
-            <p>Tariq Leather Co.</p>
-        </div>
-        <button onclick="openAdmin()" class="admin-btn">Admin Panel</button>
-    </header>
-
-    <div class="cats-bar">
-        <button onclick="filterCat('all')" class="cat-btn">All Items</button>
-        <button onclick="filterCat('jackets')" class="cat-btn">Jackets</button>
-        <button onclick="filterCat('bags')" class="cat-btn">Bags</button>
-        <button onclick="filterCat('shoes')" class="cat-btn">Shoes</button>
-        <button onclick="filterCat('wallets')" class="cat-btn">Wallets</button>
+    <!-- Top Announcement Bar -->
+    <div class="bg-gradient-to-r from-amber-600 to-yellow-600 text-black text-xs font-bold py-2 text-center tracking-wide px-4">
+        ✈️ FREE Shipping Worldwide + Free Gift 🎁
     </div>
 
-    <main><div id="grid" class="grid"></div></main>
-
-    <!-- Admin Form -->
-    <div id="adminModal" class="modal hidden">
-        <div class="modal-box">
-            <h3 style="margin-bottom:15px; text-transform:uppercase; font-size:14px; text-align:center;">Add New Item</h3>
-            <form onsubmit="addItem(event)">
-                <div class="row"><label>Title</label><input type="text" id="t" required></div>
-                <div class="row"><label>Price (\$)</label><input type="number" id="p" required></div>
-                <div class="row">
-                    <label>Category</label>
-                    <select id="c">
-                        <option value="jackets">Jackets</option>
-                        <option value="bags">Bags</option>
-                        <option value="shoes">Shoes</option>
-                        <option value="wallets">Wallets</option>
-                    </select>
+    <!-- Header / Navigation Bar -->
+    <header class="bg-cardBg/95 backdrop-blur-md border-b border-gold/20 sticky top-0 z-40 shadow-xl">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <button onclick="toggleMobileMenu()" class="text-xl text-gray-300 hover:text-gold focus:outline-none">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+                <div>
+                    <h1 class="text-xl md:text-2xl font-black tracking-widest text-gold uppercase">Monarch Leather</h1>
+                    <p class="text-[9px] text-gray-400 tracking-widest uppercase">Tariq Leather Co.</p>
                 </div>
-                <div class="row"><label>Image URL</label><input type="url" id="i" required></div>
-                <button type="submit" class="submit-btn">Publish Product</button>
-                <button type="button" onclick="closeAdmin()" style="width:100%; background:none; border:none; color:#666; margin-top:8px; font-size:11px; cursor:pointer;">Cancel</button>
-            </form>
+            </div>
+            
+            <div class="flex items-center space-x-3">
+                <!-- ADMIN PANEL BUTTON -->
+                <button onclick="openAdminModal()" class="bg-gold/10 text-gold border border-gold/40 px-3 py-1.5 rounded text-xs font-bold hover:bg-gold hover:text-black transition flex items-center gap-1.5 shadow">
+                    <i class="fa-solid fa-lock"></i> Admin Panel
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section / New Arrivals Banner -->
+    <section class="relative bg-gradient-to-b from-neutral-900 to-darkBg py-12 md:py-20 border-b border-gold/10 text-center px-4 overflow-hidden">
+        <div class="max-w-4xl mx-auto space-y-4">
+            <span class="inline-block bg-red-600 text-white text-xs px-3 py-1 rounded-full uppercase tracking-wider font-extrabold animate-pulse">
+                New Arrival • Limited Time Offer
+            </span>
+            <h2 class="text-3xl md:text-5xl font-black text-white uppercase tracking-tight">
+                Latest Styles Have Landed <br>
+                <span class="text-gold">Up To 60% OFF</span>
+            </h2>
+            <p class="text-gray-300 text-xs md:text-sm max-w-xl mx-auto">
+                Handcrafted 100% Genuine Full-Grain Leather Apparel & Accessories. Built for durability, USA Export Quality.
+            </p>
+            <div class="pt-2">
+                <a href="#jackets" class="inline-block bg-gold text-black font-extrabold px-8 py-3 rounded uppercase text-xs tracking-wider hover:bg-goldHover transition shadow-lg">
+                    Shop Collection
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Products Section -->
+    <main class="max-w-7xl mx-auto px-4 py-10 space-y-12 flex-grow">
+        <!-- Leather Jackets Section -->
+        <section id="jackets" class="space-y-4">
+            <div class="flex justify-between items-center border-b border-gray-800 pb-2">
+                <h3 class="text-lg font-bold text-white uppercase tracking-wider flex items-center gap-2">
+                    <i class="fa-solid fa-vest text-gold"></i> Leather Jackets
+                </h3>
+            </div>
+            <div id="jacketsGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6"></div>
+        </section>
+
+        <!-- Leather Shoes Section -->
+        <section id="shoes" class="space-y-4">
+            <div class="flex justify-between items-center border-b border-gray-800 pb-2">
+                <h3 class="text-lg font-bold text-white uppercase tracking-wider flex items-center gap-2">
+                    <i class="fa-solid fa-shoe-prints text-gold"></i> Leather Shoes
+                </h3>
+            </div>
+            <div id="shoesGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6"></div>
+        </section>
+
+        <!-- Leather Bags Section -->
+        <section id="bags" class="space-y-4">
+            <div class="flex justify-between items-center border-b border-gray-800 pb-2">
+                <h3 class="text-lg font-bold text-white uppercase tracking-wider flex items-center gap-2">
+                    <i class="fa-solid fa-briefcase text-gold"></i> Leather Bags
+                </h3>
+            </div>
+            <div id="bagsGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6"></div>
+        </section>
+    </main>
+
+    <!-- Footer with Social Links & Email -->
+    <footer class="bg-cardBg border-t border-gold/10 py-10 text-center text-xs text-gray-400 space-y-6">
+        <div class="flex justify-center space-x-6 text-xl">
+            <a href="https://facebook.com" target="_blank" class="hover:text-gold transition"><i class="fa-brands fa-facebook"></i></a>
+            <a href="https://instagram.com" target="_blank" class="hover:text-gold transition"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://tiktok.com" target="_blank" class="hover:text-gold transition"><i class="fa-brands fa-tiktok"></i></a>
+            <a href="https://t.me" target="_blank" class="hover:text-gold transition"><i class="fa-brands fa-telegram"></i></a>
+            <a href="mailto:garylineker040@gmail.com" class="hover:text-gold transition"><i class="fa-solid fa-envelope"></i></a>
+        </div>
+        <p>&copy; 2026 Monarch Leather | Tariq Leather Co. All rights reserved.</p>
+        <p>Contact: <a href="mailto:garylineker040@gmail.com" class="text-gold font-bold">garylineker040@gmail.com</a></p>
+    </footer>
+
+    <!-- ADMIN MODAL POPUP -->
+    <div id="adminModal" class="fixed inset-0 bg-black/90 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
+        <div class="bg-cardBg border border-gold/30 rounded-xl w-full max-w-md p-6 shadow-2xl relative">
+            <button onclick="closeAdminModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
+
+            <!-- PIN ENTRY SECTION -->
+            <div id="pinSection" class="space-y-4 text-center">
+                <div class="w-12 h-12 bg-gold/10 text-gold rounded-full flex items-center justify-center mx-auto text-xl border border-gold/30">
+                    <i class="fa-solid fa-lock"></i>
+                </div>
+                <h3 class="text-lg font-bold text-white">Admin Authentication</h3>
+                <p class="text-xs text-gray-400">Enter PIN to Upload Products</p>
+                <input type="password" id="pinInput" placeholder="Enter PIN (Default: 1234)" class="w-full bg-darkBg border border-gray-700 rounded p-3 text-center text-white tracking-widest focus:border-gold outline-none">
+                <button onclick="verifyPin()" class="w-full bg-gold text-black font-bold py-2.5 rounded hover:bg-goldHover transition">Unlock Panel</button>
+            </div>
+
+            <!-- UPLOAD FORM SECTION -->
+            <div id="uploadSection" class="hidden space-y-4">
+                <div class="border-b border-gray-800 pb-2 flex justify-between items-center">
+                    <h3 class="text-base font-bold text-gold"><i class="fa-solid fa-plus-circle"></i> Add New Product</h3>
+                    <span class="text-[10px] bg-green-900/50 text-green-400 px-2 py-0.5 rounded border border-green-700">Authenticated</span>
+                </div>
+                <form id="productForm" onsubmit="handleProductSubmit(event)" class="space-y-3">
+                    <div>
+                        <label class="text-xs text-gray-400 block mb-1">Product Title</label>
+                        <input type="text" id="pTitle" required placeholder="e.g. Classic Vintage Leather Jacket" class="w-full bg-darkBg border border-gray-700 rounded p-2 text-xs text-white focus:border-gold outline-none">
+                    </div>
+                    <div class="grid grid-cols-2 gap-2">
+                        <div>
+                            <label class="text-xs text-gray-400 block mb-1">Original Price ($)</label>
+                            <input type="number" id="pOrigPrice" required placeholder="330" class="w-full bg-darkBg border border-gray-700 rounded p-2 text-xs text-white focus:border-gold outline-none">
+                        </div>
+                        <div>
+                            <label class="text-xs text-gray-400 block mb-1">Sale Price ($)</label>
+                            <input type="number" id="pSalePrice" required placeholder="189" class="w-full bg-darkBg border border-gray-700 rounded p-2 text-xs text-white focus:border-gold outline-none">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="text-xs text-gray-400 block mb-1">Category</label>
+                        <select id="pCategory" class="w-full bg-darkBg border border-gray-700 rounded p-2 text-xs text-white focus:border-gold outline-none">
+                            <option value="Jackets">Leather Jackets</option>
+                            <option value="Shoes">Leather Shoes</option>
+                            <option value="Bags">Leather Bags</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="text-xs text-gray-400 block mb-1">Image (File Upload or URL)</label>
+                        <input type="url" id="pImageUrl" placeholder="Paste Image URL..." class="w-full bg-darkBg border border-gray-700 rounded p-2 text-xs text-white focus:border-gold outline-none mb-1">
+                        <input type="file" id="pFile" accept="image/*" onchange="convertFileToBase64(event)" class="text-[10px] text-gray-400 file:mr-2 file:py-1 file:px-2 file:rounded file:border-0 file:bg-gold/20 file:text-gold">
+                    </div>
+                    <button type="submit" class="w-full bg-gold text-black font-bold py-2.5 rounded hover:bg-goldHover transition text-xs uppercase tracking-wider">Save Product</button>
+                </form>
+            </div>
         </div>
     </div>
 
     <script>
-        const initial = [
-            { id: 1, title: "Bomber Lambskin Leather Jacket", category: "jackets", price: 189, img: "https://unsplash.com" },
-            { id: 2, title: "Luxury Brown Briefcase Bag", category: "bags", price: 139, img: "https://unsplash.com" },
-            { id: 3, title: "Monarch OG Leather Bifold Wallet", category: "wallets", price: 45, img: "https://unsplash.com" }
+        const initialProducts = [
+            { id: 1, title: "Bomber Lambskin Genuine Leather Jacket", category: "Jackets", origPrice: 330, salePrice: 189, image: "https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=600&q=80" },
+            { id: 2, title: "Men's B3 Shearling Leather Jacket", category: "Jackets", origPrice: 280, salePrice: 209, image: "https://images.unsplash.com/photo-1520975954732-35dd22299614?auto=format&fit=crop&w=600&q=80" },
+            { id: 3, title: "Men's Polished Black Leather Shoes", category: "Shoes", origPrice: 290, salePrice: 210, image: "https://images.unsplash.com/photo-1614252235316-8c857d38b5f4?auto=format&fit=crop&w=600&q=80" },
+            { id: 4, title: "Venezia Brown Leather Briefcase", category: "Bags", origPrice: 299, salePrice: 139, image: "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?auto=format&fit=crop&w=600&q=80" }
         ];
 
-        let state = JSON.parse(localStorage.getItem('monarch_db')) || initial;
-        let currentFilter = "all";
+        let products = JSON.parse(localStorage.getItem('monarch_catalog')) || initialProducts;
+        let currentBase64 = '';
 
-        function render() {
-            const grid = document.getElementById("grid");
-            const filtered = currentFilter === "all" ? state : state.filter(p => p.category === currentFilter);
-            grid.innerHTML = "";
-            filtered.forEach(item => {
-                grid.innerHTML += `
-                    <div class="card">
-                        <img src="${item.img}" alt="Product">
-                        <h4>${item.title}</h4>
-                        <div class="price">$${item.price}.00</div>
+        function renderCatalog() {
+            const jGrid = document.getElementById('jacketsGrid');
+            const sGrid = document.getElementById('shoesGrid');
+            const bGrid = document.getElementById('bagsGrid');
+
+            jGrid.innerHTML = ''; sGrid.innerHTML = ''; bGrid.innerHTML = '';
+
+            products.forEach((p, idx) => {
+                const discount = Math.round(((p.origPrice - p.salePrice) / p.origPrice) * 100);
+                const card = `
+                    <div class="bg-cardBg border border-gray-800 rounded-lg overflow-hidden shadow-md flex flex-col justify-between hover:border-gold/40 transition group">
+                        <div class="relative h-44 sm:h-56 bg-neutral-900 overflow-hidden">
+                            <img src="${p.image}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                            <span class="absolute top-2 left-2 bg-red-600 text-white text-[9px] font-black px-1.5 py-0.5 rounded">${discount}% OFF</span>
+                        </div>
+                        <div class="p-3 space-y-1">
+                            <h4 class="text-xs font-bold text-white line-clamp-2">${p.title}</h4>
+                            <div class="flex items-center space-x-2">
+                                <span class="text-xs text-gray-500 line-through">$${p.origPrice}.00</span>
+                                <span class="text-sm font-extrabold text-gold">$${p.salePrice}.00</span>
+                            </div>
+                            <a href="mailto:garylineker040@gmail.com?subject=Inquiry: ${encodeURIComponent(p.title)}" class="block w-full text-center bg-gold/10 text-gold border border-gold/30 text-[10px] py-1 rounded font-bold hover:bg-gold hover:text-black transition mt-2">
+                                <i class="fa-solid fa-envelope"></i> Order via Email
+                            </a>
+                        </div>
                     </div>
                 `;
+                if (p.category === 'Jackets') jGrid.innerHTML += card;
+                else if (p.category === 'Shoes') sGrid.innerHTML += card;
+                else if (p.category === 'Bags') bGrid.innerHTML += card;
             });
         }
 
-        function filterCat(cat) { currentFilter = cat; render(); }
-        function openAdmin() { document.getElementById("adminModal").classList.remove("hidden"); }
-        function closeAdmin() { document.getElementById("adminModal").classList.add("hidden"); }
-
-        function addItem(e) {
-            e.preventDefault();
-            const n = {
-                id: Date.now(),
-                title: document.getElementById("t").value,
-                price: parseInt(document.getElementById("p").value),
-                category: document.getElementById("c").value,
-                img: document.getElementById("i").value
-            };
-            state.unshift(n);
-            localStorage.setItem('monarch_db', JSON.stringify(state));
-            render();
-            e.target.reset();
-            closeAdmin();
+        function convertFileToBase64(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onloadend = () => { currentBase64 = reader.result; };
+                reader.readAsDataURL(file);
+            }
         }
-        window.onload = render;
+
+        function handleProductSubmit(e) {
+            e.preventDefault();
+            const title = document.getElementById('pTitle').value;
+            const origPrice = Number(document.getElementById('pOrigPrice').value);
+            const salePrice = Number(document.getElementById('pSalePrice').value);
+            const category = document.getElementById('pCategory').value;
+            const urlImg = document.getElementById('pImageUrl').value;
+
+            const finalImg = urlImg || currentBase64 || 'https://via.placeholder.com/400x500?text=Monarch+Leather';
+
+            products.push({ id: Date.now(), title, category, origPrice, salePrice, image: finalImg });
+            localStorage.setItem('monarch_catalog', JSON.stringify(products));
+
+            document.getElementById('productForm').reset();
+            currentBase64 = '';
+            closeAdminModal();
+            renderCatalog();
+        }
+
+        function openAdminModal() { document.getElementById('adminModal').classList.remove('hidden'); }
+        function closeAdminModal() { 
+            document.getElementById('adminModal').classList.add('hidden');
+            document.getElementById('pinSection').classList.remove('hidden');
+            document.getElementById('uploadSection').classList.add('hidden');
+            document.getElementById('pinInput').value = '';
+        }
+        function verifyPin() {
+            if (document.getElementById('pinInput').value === '1234') {
+                document.getElementById('pinSection').classList.add('hidden');
+                document.getElementById('uploadSection').classList.remove('hidden');
+            } else {
+                alert('Incorrect PIN! Default is 1234');
+            }
+        }
+
+        renderCatalog();
     </script>
 </body>
 </html>
