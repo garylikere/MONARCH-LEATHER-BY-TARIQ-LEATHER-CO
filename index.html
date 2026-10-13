@@ -1,139 +1,132 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Monarch Leather | Tariq Leather Co.</title>
-    <!-- Stable Visual Framework Delivery Targets -->
-    <script src="https://unpkg.com"></script>
-    <link rel="stylesheet" href="https://jsdelivr.net">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        gold: '#D4AF37',
-                        goldHover: '#AA8A26',
-                        darkBg: '#0A0A0A',
-                        cardBg: '#121212',
-                        borderGray: '#222222'
-                    }
-                }
-            }
-        }
-    </script>
     <style>
-        .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
-        .custom-scrollbar::-webkit-scrollbar-track { background: #0A0A0A; }
-        .custom-scrollbar::-webkit-scrollbar-thumb { background: #D4AF37; border-radius: 3px; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: sans-serif; }
+        body { background-color: #0A0A0A; color: #E0E0E0; min-h: 100vh; display: flex; flex-direction: column; }
+        .promo-bar { background-color: #D4AF37; color: #000; text-align: center; padding: 8px; font-size: 12px; font-weight: bold; letter-spacing: 1px; }
+        header { background-color: #121212; border-bottom: 1px solid rgba(212, 175, 55, 0.2); padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 50; }
+        .brand-title { color: #D4AF37; font-size: 22px; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; }
+        .brand-sub { color: #888; font-size: 9px; text-transform: uppercase; letter-spacing: 2px; margin-top: 2px; }
+        .admin-btn { background-color: rgba(212, 175, 55, 0.1); color: #D4AF37; border: 1px solid rgba(212, 175, 55, 0.4); padding: 6px 12px; rounded-radius: 4px; font-size: 12px; font-weight: bold; cursor: pointer; transition: 0.3s; }
+        .admin-btn:hover { background-color: #D4AF37; color: #000; }
+        .hero { text-align: center; padding: 40px 20px; background: linear-gradient(#1A1A1A, #0A0A0A); border-bottom: 1px solid #222; }
+        .hero h2 { font-size: 32px; font-weight: 900; color: #FFF; text-transform: uppercase; margin: 10px 0; }
+        .hero h2 span { color: #D4AF37; }
+        .hero p { color: #AAA; font-size: 14px; max-width: 600px; margin: 0 auto 15px; }
+        .cats-section { max-width: 1200px; margin: 0 auto; padding: 30px 20px 10px; text-align: center; }
+        .cats-title { font-size: 11px; text-transform: uppercase; tracking-letter: 2px; color: #888; font-weight: bold; }
+        .cats-main { font-size: 20px; text-transform: uppercase; color: #FFF; margin-bottom: 20px; letter-spacing: 1px; }
+        .circle-container { display: flex; justify-content: center; gap: 20px; overflow-x: auto; padding-bottom: 10px; }
+        .circle-item { cursor: pointer; text-align: center; min-width: 80px; }
+        .circle-inner { w: 60px; height: 60px; border-radius: 50%; background-color: #121212; border: 2px solid rgba(212, 175, 55, 0.3); margin: 0 auto 8px; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #D4AF37; transition: 0.3s; }
+        .circle-item:hover .circle-inner { border-color: #D4AF37; background-color: rgba(212, 175, 55, 0.1); }
+        .circle-item p { font-size: 11px; font-weight: bold; text-transform: uppercase; }
+        .catalog { max-width: 1200px; margin: 0 auto; w: 100%; padding: 20px; flex-grow: 1; }
+        .catalog-header { display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 1px solid #222; padding-bottom: 10px; margin-bottom: 20px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 25px; }
+        .card { background-color: #121212; border: 1px solid #222; border-radius: 8px; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; }
+        .img-box { aspect-ratio: 1; background-color: #1A1A1A; position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+        .img-box img { w: 100%; height: 100%; object-fit: cover; }
+        .badge { position: absolute; top: 10px; left: 10px; background-color: #DC2626; color: #FFF; font-size: 9px; font-weight: bold; padding: 3px 6px; border-radius: 3px; text-transform: uppercase; }
+        .info { padding: 15px; display: flex; flex-direction: column; justify-content: space-between; flex-grow: 1; }
+        .info h4 { font-size: 13px; font-weight: bold; text-transform: uppercase; margin-bottom: 10px; line-clamp: 2; height: 32px; overflow: hidden; }
+        .price-box { display: flex; align-items: center; gap: 10px; }
+        .price { color: #D4AF37; font-weight: 900; font-size: 15px; }
+        .old-price { color: #555; text-decoration: line-through; font-size: 11px; }
+        .add-btn { w: 100%; margin-top: 12px; background-color: #0A0A0A; border: 1px solid rgba(212, 175, 55, 0.3); color: #D4AF37; padding: 8px; font-size: 10px; text-transform: uppercase; font-weight: bold; cursor: pointer; border-radius: 4px; transition: 0.3s; }
+        .add-btn:hover { background-color: #D4AF37; color: #000; border-color: #D4AF37; }
+        .modal { position: fixed; inset: 0; background-color: rgba(0,0,0,0.8); display: flex; align-items: center; justify-content: center; z-index: 100; padding: 20px; }
+        .modal-box { background-color: #121212; border: 1px solid #D4AF37; border-radius: 8px; max-width: 400px; w: 100%; padding: 25px; position: relative; }
+        .close-btn { position: absolute; top: 10px; right: 10px; background: none; border: none; color: #888; font-size: 18px; cursor: pointer; }
+        .form-group { margin-bottom: 12px; }
+        .form-group label { display: block; font-size: 11px; text-transform: uppercase; color: #AAA; margin-bottom: 4px; }
+        .form-group input, .form-group select { w: 100%; background-color: #0A0A0A; border: 1px solid #222; padding: 8px; color: #FFF; font-size: 12px; border-radius: 4px; }
+        .submit-btn { w: 100%; background-color: #D4AF37; color: #000; font-weight: bold; text-transform: uppercase; padding: 10px; border: none; border-radius: 4px; cursor: pointer; margin-top: 10px; }
+        .hidden { display: none !important; }
+        footer { background-color: #121212; border-top: 1px solid #222; text-align: center; padding: 20px; font-size: 11px; color: #666; }
+        footer a { color: #D4AF37; text-decoration: none; }
     </style>
 </head>
-<body class="bg-darkBg text-gray-200 font-sans antialiased min-h-screen flex flex-col justify-between">
+<body>
 
-    <!-- Top Promo Bar -->
-    <div class="bg-gold text-black text-center py-1.5 text-xs font-bold tracking-wide">
-        ⚡ FREE Shipping Worldwide + Free Gift On Every Order! 🎁
-    </div>
+    <div class="promo-bar">⚡ FREE SHIPPING WORLDWIDE + FREE GIFT ON EVERY ORDER!</div>
 
-    <!-- Header / Navbar -->
-    <header class="bg-cardBg/95 backdrop-blur-md border-b border-gold/10 sticky top-0 z-50 shadow-xl">
-        <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
-            <div class="flex items-center space-x-4">
-                <button onclick="toggleSidebar(true)" class="text-white hover:text-gold text-xl focus:outline-none">
-                    <i class="fa-solid fa-bars"></i>
-                </button>
-                <div>
-                    <h1 class="text-xl md:text-2xl font-black tracking-wider text-gold uppercase m-0 leading-none">Monarch Leather</h1>
-                    <p class="text-[9px] text-gray-400 tracking-widest uppercase mt-1">Tariq Leather Co.</p>
-                </div>
-            </div>
-            
-            <div class="flex items-center space-x-4">
-                <button onclick="openAdminModal()" class="bg-gold/10 text-gold border border-gold/40 px-3 py-1.5 rounded-md text-xs font-semibold hover:bg-gold hover:text-black transition flex items-center gap-1.5 shadow-md">
-                    <i class="fa-solid fa-lock"></i> Admin Panel
-                </button>
-                <div class="relative cursor-pointer text-white hover:text-gold transition">
-                    <i class="fa-solid fa-bag-shopping text-xl"></i>
-                    <span id="cartCount" class="absolute -top-2 -right-2 bg-gold text-black text-[10px] font-bold px-1.5 py-0.5 rounded-full">0</span>
-                </div>
-            </div>
+    <header>
+        <div>
+            <div class="brand-title">Monarch Leather</div>
+            <div class="brand-sub">Tariq Leather Co.</div>
         </div>
+        <button onclick="openAdmin()" class="admin-btn">Admin Panel</button>
     </header>
 
-    <!-- Navigation Drawer / Sidebar -->
-    <div id="sidebar" class="fixed inset-0 bg-black/70 z-50 transition-opacity duration-300 opacity-0 pointer-events-none">
-        <div class="fixed inset-y-0 left-0 w-72 bg-cardBg border-r border-gold/10 p-5 transform -translate-x-full transition-transform duration-300 flex flex-col justify-between">
-            <div>
-                <div class="flex justify-between items-center pb-4 border-b border-borderGray">
-                    <h3 class="text-gold font-bold uppercase tracking-wider">Menu Categories</h3>
-                    <button onclick="toggleSidebar(false)" class="text-gray-400 hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
+    <section class="hero">
+        <h2>Handcrafted Luxury <span>Leather Jackets</span></h2>
+        <p>Engineered from 100% genuine full-grain leather for ultimate durability, comfort, and modern USA fit.</p>
+    </section>
+
+    <section class="cats-section">
+        <div class="cats-title">Let's Craft Your Next</div>
+        <div class="cats-main">Masterpiece</div>
+        <div class="circle-container">
+            <div onclick="filterCat('all')" class="circle-item"><div class="circle-inner">ALL</div><p>All</p></div>
+            <div onclick="filterCat('jackets')" class="circle-item"><div class="circle-inner">JKT</div><p>Jackets</p></div>
+            <div onclick="filterCat('bags')" class="circle-item"><div class="circle-inner">BAG</div><p>Bags</p></div>
+            <div onclick="filterCat('shoes')" class="circle-item"><div class="circle-inner">SHS</div><p>Shoes</p></div>
+            <div onclick="filterCat('wallets')" class="circle-item"><div class="circle-inner">WLT</div><p>Wallets</p></div>
+        </div>
+    </section>
+
+    <main class="catalog">
+        <div class="catalog-header">
+            <h3 id="catTitle" style="text-transform: uppercase;">Spotlight Deals</h3>
+            <span id="counter" style="font-size: 11px; color: #D4AF37; font-weight: bold;">Loading...</span>
+        </div>
+        <div id="grid" class="grid"></div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Monarch Leather | Tariq Leather Co. All Rights Reserved.</p>
+        <p>Export Contact: <a href="mailto:garylineker040@gmail.com">garylineker040@gmail.com</a></p>
+    </footer>
+
+    <!-- Admin Panel Modal -->
+    <div id="adminModal" class="modal hidden">
+        <div class="modal-box">
+            <button onclick="closeAdmin()" class="close-btn">&times;</button>
+            
+            <div id="authBox">
+                <h3 style="text-align: center; margin-bottom: 15px; text-transform: uppercase;">Admin Verification</h3>
+                <div class="form-group">
+                    <input type="password" id="pinInput" placeholder="Enter Security PIN (Default: 1234)" style="text-align: center;">
                 </div>
-                <nav class="mt-4 space-y-1">
-                    <button onclick="filterCategory('all')" class="w-full text-left py-2.5 px-3 rounded hover:bg-gold/10 hover:text-gold transition text-sm font-medium flex justify-between items-center"><span>All Collections</span><i class="fa-solid fa-chevron-right text-[10px]"></i></button>
-                    <button onclick="filterCategory('jackets')" class="w-full text-left py-2.5 px-3 rounded hover:bg-gold/10 hover:text-gold transition text-sm font-medium flex justify-between items-center"><span>Leather Jackets <span class="bg-red-600 text-white text-[9px] px-1 rounded ml-1 font-bold">HOT</span></span><i class="fa-solid fa-chevron-right text-[10px]"></i></button>
-                    <button onclick="filterCategory('bags')" class="w-full text-left py-2.5 px-3 rounded hover:bg-gold/10 hover:text-gold transition text-sm font-medium flex justify-between items-center"><span>Leather Bags <span class="bg-gold text-black text-[9px] px-1 rounded ml-1 font-bold">NEW</span></span><i class="fa-solid fa-chevron-right text-[10px]"></i></button>
-                    <button onclick="filterCategory('shoes')" class="w-full text-left py-2.5 px-3 rounded hover:bg-gold/10 hover:text-gold transition text-sm font-medium flex justify-between items-center"><span>Leather Shoes</span><i class="fa-solid fa-chevron-right text-[10px]"></i></button>
-                    <button onclick="filterCategory('wallets')" class="w-full text-left py-2.5 px-3 rounded hover:bg-gold/10 hover:text-gold transition text-sm font-medium flex justify-between items-center"><span>Leather Wallets</span><i class="fa-solid fa-chevron-right text-[10px]"></i></button>
-                </nav>
+                <button onclick="verifyPin()" class="submit-btn">Unlock Dashboard</button>
             </div>
-            <div class="border-t border-borderGray pt-4">
-                <p class="text-xs text-gray-500 mb-2">Follow Us</p>
-                <div class="flex space-x-3">
-                    <a href="#" target="_blank" class="text-gray-400 hover:text-gold text-lg"><i class="fa-brands fa-facebook"></i></a>
-                    <a href="#" target="_blank" class="text-gray-400 hover:text-gold text-lg"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="#" target="_blank" class="text-gray-400 hover:text-gold text-lg"><i class="fa-brands fa-tiktok"></i></a>
-                </div>
+
+            <div id="dashBox" class="hidden">
+                <h3 style="text-align: center; margin-bottom: 15px; text-transform: uppercase; color: #D4AF37;">Add New Product</h3>
+                <form onsubmit="createProduct(event)">
+                    <div class="form-group"><label>Item Title</label><input type="text" id="pTitle" required></div>
+                    <div class="form-group"><label>Retail Price ($)</label><input type="number" id="pPrice" required></div>
+                    <div class="form-group"><label>Compare Price ($)</label><input type="number" id="pComp" required></div>
+                    <div class="form-group">
+                        <label>Category</label>
+                        <select id="pCat">
+                            <option value="jackets">Leather Jackets</option>
+                            <option value="bags">Leather Bags</option>
+                            <option value="shoes">Leather Shoes</option>
+                            <option value="wallets">Leather Wallets</option>
+                        </select>
+                    </div>
+                    <div class="form-group"><label>Image URL Link</label><input type="url" id="pImg" required></div>
+                    <button type="submit" class="submit-btn">Publish Product</button>
+                </form>
             </div>
         </div>
     </div>
 
-    <!-- Hero Banner Slider -->
-    <section class="relative bg-gradient-to-b from-neutral-900 to-darkBg py-12 text-center px-4 border-b border-borderGray">
-        <div class="max-w-4xl mx-auto space-y-4">
-            <span class="inline-block bg-gold/10 text-gold text-[11px] px-3 py-1 rounded-full uppercase tracking-widest border border-gold/20 font-bold">New Arrival Latest Styles</span>
-            <h2 class="text-3xl md:text-5xl font-black text-white tracking-tight uppercase">Up to <span class="text-gold">60% OFF</span> For Retail & B2B</h2>
-            <p class="text-gray-400 text-xs md:text-sm max-w-xl mx-auto">Engineered from 100% genuine full-grain leather. Direct USA export quality standard fit setup.</p>
-            <div class="inline-flex items-center bg-cardBg border border-dashed border-gold/40 px-3 py-1.5 rounded text-xs gap-2">
-                <span class="text-gray-400">Use Coupon Code:</span>
-                <span class="text-gold font-bold tracking-wider">SAVE10</span>
-            </div>
-        </div>
-    </section>
-
-    <!-- Category Circles Navigation -->
-    <section class="max-w-7xl mx-auto px-4 pt-10 text-center">
-        <h3 class="text-xs uppercase tracking-widest text-gray-400 font-bold mb-1">Let's Craft Your Next</h3>
-        <h2 class="text-xl font-black text-white tracking-widest uppercase mb-6">Masterpiece</h2>
-        
-        <div class="flex justify-center items-center gap-6 md:gap-12 overflow-x-auto pb-4 custom-scrollbar">
-            <div onclick="filterCategory('jackets')" class="group cursor-pointer flex-shrink-0 text-center">
-                <div class="w-16 h-16 rounded-full bg-cardBg border-2 border-gold/30 group-hover:border-gold flex items-center justify-center transition shadow-lg overflow-hidden">
-                    <i class="fa-solid fa-user-tie text-xl text-gold"></i>
-                </div>
-                <p class="text-[11px] font-bold mt-2 uppercase tracking-wider group-hover:text-gold transition">Jackets</p>
-            </div>
-            <div onclick="filterCategory('bags')" class="group cursor-pointer flex-shrink-0 text-center">
-                <div class="w-16 h-16 rounded-full bg-cardBg border-2 border-gold/30 group-hover:border-gold flex items-center justify-center transition shadow-lg overflow-hidden">
-                    <i class="fa-solid fa-bag-shopping text-xl text-gold"></i>
-                </div>
-                <p class="text-[11px] font-bold mt-2 uppercase tracking-wider group-hover:text-gold transition">Bags</p>
-            </div>
-            <div onclick="filterCategory('shoes')" class="group cursor-pointer flex-shrink-0 text-center">
-                <div class="w-16 h-16 rounded-full bg-cardBg border-2 border-gold/30 group-hover:border-gold flex items-center justify-center transition shadow-lg overflow-hidden">
-                    <i class="fa-solid fa-shoe-prints text-xl text-gold"></i>
-                </div>
-                <p class="text-[11px] font-bold mt-2 uppercase tracking-wider group-hover:text-gold transition">Shoes</p>
-            </div>
-            <div onclick="filterCategory('wallets')" class="group cursor-pointer flex-shrink-0 text-center">
-                <div class="w-16 h-16 rounded-full bg-cardBg border-2 border-gold/30 group-hover:border-gold flex items-center justify-center transition shadow-lg overflow-hidden">
-                    <i class="fa-solid fa-wallet text-xl text-gold"></i>
-                </div>
-                <p class="text-[11px] font-bold mt-2 uppercase tracking-wider group-hover:text-gold transition">Wallets</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Product Catalog Section -->
-    <section id="catalog" class="max-w-7xl mx-auto px-4 py-8 flex-grow">
-        <div class="flex justify-between items-end mb-6 border-b border-borderGray pb-3">
-            <div>
+    <script>
+        const initialData = [
